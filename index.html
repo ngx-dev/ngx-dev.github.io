@@ -76,9 +76,9 @@
                         <p ng-show="noorgs">No results</p>
                         <div class="ui raised segment" ng-repeat="org in orgs">
                             <h4 class="ui dividing header">
-                                <img class="ui image" ng-src="{{org.html_url}}">
-                                <a ng-href="{{org.url}}" ng-attr-target="_blank">
-                                    <div class="content">{{ org.login}}</div>
+                                <img class="ui image" ng-src="{{org.avatar_url}}">
+                                <a ng-href="{{org.html_url}}" ng-attr-target="_blank">
+                                    <div class="content">{{org.login}}</div>
                                 </a>
                             </h4>
                             <p class="description">{{org.description ? org.description : 'No description'}}</p>
