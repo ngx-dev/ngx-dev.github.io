@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Keytree JS test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div ng-app="keytreeTest" ng-controller="appCtrl">
+        <div class="ui container">
+            <!-- HEADER -->
+            <div class="ui center aligned basic segment">
+                <div class="ui huge centered header">
+                    {{ title }}
+                    <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16"
+                        version="1.1" width="32" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+            <!-- end HEADER -->
+            <!-- SEARCH FORM -->
+            <div class="ui one column centered grid">
+                <div class="column">
+                    <form class="ui form" novalidate>
+                        <div class="field">
+                            <label>Search by username</label>
+                            <div class="ui action input">
+                                <input type="text" ng-model="username" required>
+                                <button class="ui positive button" type="submit" ng-click="submit(username)"
+                                    ng-show="!loading" ng-disabled="!username">Search</button>
+                                <button class="ui positive loading button" type="submit" ng-click="submit(username)"
+                                    ng-show="loading">Search</button>
+                                <button class="ui button" type="submit" ng-show="resultReady"
+                                    ng-click="clear()">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end SEARCH FORM -->
+            <!-- RESULTS -->
+            <div class="result" ng-show="resultReady && !loading">
+                <div class="ui two column centered grid">
+                    <!-- REPOSITORIES -->
+                    <div class="column">
+                        <div class="ui center aligned basic segment">
+                            <div class="ui centered header">REPOSITORIES</div>
+                        </div>
+                        <p ng-show="norepos">No results</p>
+                        <div class="ui raised segment" ng-repeat="repo in repos">
+                            <h4 class="ui dividing header">
+                                <img class="ui image" ng-src="{{repo.owner.avatar_url}}">
+                                <a ng-href="{{repo.html_url}}" ng-attr-target="_blank">
+                                    <div class="content">{{repo.name}}</div>
+                                </a>
+                            </h4>
+                            <p class="description">{{repo.description ? repo.description : 'No description'}}</p>
+                        </div>
+                    </div>
+                    <!-- end REPOSITORIES -->
+                    <!-- ORGANIZATIONS -->
+                    <div class="column">
+                        <div class="ui center aligned basic segment">
+                            <div class="ui centered header">ORGANIZATIONS</div>
+                        </div>
+                        <p ng-show="noorgs">No results</p>
+                        <div class="ui raised segment" ng-repeat="org in orgs">
+                            <h4 class="ui dividing header">
+                                <img class="ui image" ng-src="{{org.avatar_url}}">
+                                <a ng-href="{{org.url}}" ng-attr-target="_blank">
+                                    <div class="content">{{ org.login}}</div>
+                                </a>
+                            </h4>
+                            <p class="description">{{org.description ? org.description : 'No description'}}</p>
+                        </div>
+                    </div>
+                    <!-- end ORGANIZATIONS -->
+                </div>
+            </div>
+            <!-- end RESULTS -->
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+
+</body>
+
+</html>
