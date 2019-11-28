@@ -1,5 +1,5 @@
 # Demo
-Live project can be found here: https://stackblitz.com/github/ngx-dev/javascript-interview-project
+Live project can be found here: https://ngx-dev.github.io/
 
 # JS Interview Project (AngularJS)
 This is the result made for the JavaScript interview.
